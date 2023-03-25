@@ -1,4 +1,4 @@
-package vidmot;
+package vinnsla;
 
 public class Room {
 }

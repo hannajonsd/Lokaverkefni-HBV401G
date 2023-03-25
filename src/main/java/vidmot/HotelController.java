@@ -9,6 +9,6 @@ public class HotelController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+        welcomeText.setText("Velkomin á heimasíðu Hótel Landsins");
     }
 }

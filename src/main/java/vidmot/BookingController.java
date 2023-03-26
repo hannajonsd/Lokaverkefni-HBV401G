@@ -8,8 +8,16 @@ import java.util.Date;
 public class BookingController {
     public Booking bk;
 
+    public BookingController(Booking booking) {
+        bk = booking;
+    }
+
     public void createBooking(String hotel, String user, int roomnumber, Date start, Date end){
-        bk = new Booking(hotel, user, roomnumber, start, end);
+        bk.setHotel(hotel);
+        bk.setUser(user);
+        bk.setRoomnumber(roomnumber);
+        bk.setStart(start);
+        bk.setEnd(end);
 
     }
 }

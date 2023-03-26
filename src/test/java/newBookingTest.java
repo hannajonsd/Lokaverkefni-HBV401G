@@ -12,56 +12,34 @@ import static org.junit.Assert.*;
 
 
 public class newBookingTest {
-    private HotelService hotelService;
-    private ReservationService reservationService;
+    private Booking bk;
     private BookingController bookingController;
+
+    public String hotel = "Test Hotel";
+    public String user = "Test User";
+    public int roomnumber = 123;
+    public Date start = new Date();
+    public Date end = new Date();
 
     @Before
     public void setUp() {
-        // Create mock objects for hotelService and reservationService
-        hotelService = mock(HotelService.class);
-        reservationService = mock(ReservationService.class);
+        bk = new Booking();
+        bookingController = new BookingController(bk);
+        bookingController.createBooking(hotel, user, roomnumber, start, end);
 
-        // Create a BookingController with the mock objects
-        bookingController = new BookingController(hotelService, reservationService);
     }
 
     @Test
-    public void testBook_SuccessfulBooking() {
-        // Create a BookingRequest object with valid hotel ID
-        Booking booking = new Booking("hotel", "John Smith",1234, new Date(2023, Calendar.MAY, 1), new Date(2023, Calendar.MAY, 5));
+    public void testCreateBooking() {
 
-        // Set up the mock hotelService to return the hotel
-        when(hotelService.getHotelById("1234")).thenReturn(hotel);
-
-        // Create a Reservation object
-        Reservation reservation = new Reservation("5678", bookingRequest.getGuestName(), bookingRequest.getStartDate(), bookingRequest.getEndDate(), hotel);
-
-        // Set up the mock reservationService to return the reservation
-        when(reservationService.makeReservation(bookingRequest, hotel)).thenReturn(reservation);
-
-        // Call the book() method and assert that it returns a non-null Booking object
-        assertNotNull(bookingController.book(bookingRequest));
+        assertEquals(hotel, bk.getHotel());
+        assertEquals(user, bk.getUser());
+        assertEquals(roomnumber, bk.getRoomNumber());
+        assertEquals(start, bk.getStartDate());
+        assertEquals(end, bk.getEndDate());
     }
 
-    @Test
-    public void testBook_HotelNotFound() {
-        // Create a BookingRequest object with invalid hotel ID
-        Booking booking = new Booking("5678", "Jane Doe", LocalDate.of(2023, 4, 1), LocalDate.of(2023, 4, 5));
-
-        // Set up the mock hotelService to return null
-        when(hotelService.getHotelById("5678")).thenReturn(null);
-
-        // Call the book() method and assert that it returns null
-        assertNull(bookingController.book(bookingRequest));
-    }
-
-
-
-
-
-
-        @AfterClass
+    @AfterClass
     public static void tearDownClass() {
         // Clean up resources used by all tests
     }

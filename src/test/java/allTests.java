@@ -5,5 +5,4 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ newBookingTest.class, searchHotelTest.class})
 
 public class allTests {
-
 }

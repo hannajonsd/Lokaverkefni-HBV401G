@@ -9,14 +9,6 @@ public class Booking {
     public Date start;
     public Date end;
 
-    public Booking() {
-        hotel="";
-        user="";
-        roomnumber=0;
-        start=null;
-        end=null;
-    }
-
     public String getHotel() {
         return hotel;
     }
@@ -55,5 +47,21 @@ public class Booking {
 
     public Date getEndDate() {
         return end;
+    }
+
+    public Booking() {
+        this.hotel ="";
+        this.user = "";
+        this.roomnumber = 0;
+        this.start = null;
+        this.end = null;
+    }
+
+    public void createBooking(String hotel, String user, int roomnumber, Date start, Date end) {
+        setHotel(hotel);
+        setUser(user);
+        setRoomnumber(roomnumber);
+        setStart(start);
+        setEnd(end);
     }
 }

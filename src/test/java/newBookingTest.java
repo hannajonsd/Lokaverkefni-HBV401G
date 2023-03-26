@@ -12,35 +12,30 @@ import static org.junit.Assert.*;
 
 
 public class newBookingTest {
-    private Booking bk;
-    private BookingController bookingController;
 
-    public String hotel = "Test Hotel";
-    public String user = "Test User";
-    public int roomnumber = 123;
-    public Date start = new Date();
-    public Date end = new Date();
+    private Booking mockBooking;
+    private BookingController controller;
 
     @Before
     public void setUp() {
-        bk = new Booking();
-        bookingController = new BookingController(bk);
-        bookingController.createBooking(hotel, user, roomnumber, start, end);
-
+        mockBooking = mock(Booking.class);
+        controller = new BookingController(mockBooking);
     }
 
     @Test
     public void testCreateBooking() {
+        String hotel = "Hilton";
+        String user = "John";
+        int roomnumber = 101;
+        Date start = new Date();
+        Date end = new Date();
+        controller.createBooking(hotel, user, roomnumber, start, end);
 
-        assertEquals(hotel, bk.getHotel());
-        assertEquals(user, bk.getUser());
-        assertEquals(roomnumber, bk.getRoomNumber());
-        assertEquals(start, bk.getStartDate());
-        assertEquals(end, bk.getEndDate());
+        verify(mockBooking).createBooking(hotel, user, roomnumber, start, end);
     }
 
-    @AfterClass
-    public static void tearDownClass() {
-        // Clean up resources used by all tests
+    @After
+    public void tearDown() {
+        reset(mockBooking);
     }
 }

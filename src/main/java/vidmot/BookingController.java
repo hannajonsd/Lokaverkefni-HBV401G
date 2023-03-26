@@ -13,11 +13,7 @@ public class BookingController {
     }
 
     public void createBooking(String hotel, String user, int roomnumber, Date start, Date end){
-        bk.setHotel(hotel);
-        bk.setUser(user);
-        bk.setRoomnumber(roomnumber);
-        bk.setStart(start);
-        bk.setEnd(end);
+       bk.createBooking(hotel, user, roomnumber, start, end);
 
     }
 }

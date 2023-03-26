@@ -23,16 +23,30 @@ public class newBookingTest {
     }
 
     @Test
-    public void testCreateBooking() {
+    public void testCreateBooking1() {
         String hotel = "Hilton";
         String user = "John";
         int roomnumber = 101;
-        Date start = new Date();
-        Date end = new Date();
+        Date start = new Date(2023, Calendar.MAY, 1);
+        Date end = new Date(2023, Calendar.MAY, 6);
         controller.createBooking(hotel, user, roomnumber, start, end);
 
         verify(mockBooking).createBooking(hotel, user, roomnumber, start, end);
     }
+
+    @Test
+    public void testCreateBooking2() {
+        String user = "John";
+        int roomnumber = 101;
+        Date start = new Date();
+        Date end = new Date();
+        boolean b = controller.createBooking(null, user, roomnumber, start, end);
+
+        assertFalse(b);
+    }
+
+
+
 
     @After
     public void tearDown() {

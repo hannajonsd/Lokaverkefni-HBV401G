@@ -12,8 +12,7 @@ public class BookingController {
         bk = booking;
     }
 
-    public void createBooking(String hotel, String user, int roomnumber, Date start, Date end){
-       bk.createBooking(hotel, user, roomnumber, start, end);
-
+    public boolean createBooking(String hotel, String user, int roomnumber, Date start, Date end){
+       return bk.createBooking(hotel, user, roomnumber, start, end);
     }
 }

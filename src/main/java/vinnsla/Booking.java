@@ -57,11 +57,15 @@ public class Booking {
         this.end = null;
     }
 
-    public void createBooking(String hotel, String user, int roomnumber, Date start, Date end) {
+    public boolean createBooking(String hotel, String user, int roomnumber, Date start, Date end) {
+        if (hotel == null || user == null || start == null || end == null) {
+            return false;
+        }
         setHotel(hotel);
         setUser(user);
         setRoomnumber(roomnumber);
         setStart(start);
         setEnd(end);
+        return true;
     }
 }

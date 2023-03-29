@@ -13,15 +13,22 @@ import static org.junit.Assert.*;
 
 public class newBookingTest {
 
-    private Booking mockBooking;
-    private BookingController controller;
+    private Booking mockBooking; //Tilviksbreyta fyrir mockBooking af gerð Booking
+    private BookingController controller; //Tilviksbreyta fyrir controllerinn
 
+    /**
+     * Setjum mockBooking sem mock af klasanum Booking,
+     * gerum nýjan controller með mock booking
+     */
     @Before
     public void setUp() {
         mockBooking = mock(Booking.class);
         controller = new BookingController(mockBooking);
     }
 
+    /**
+     * Göngum úr skugga að það sé búin til bókun, skilar true ef bókunin er búin til
+     */
     @Test
     public void testCreateBooking1() {
         String hotel = "Hilton";
@@ -34,6 +41,10 @@ public class newBookingTest {
         verify(mockBooking).createBooking(hotel, user, roomnumber, start, end);
     }
 
+
+    /**
+     * Setjum null til að testa hvort þetta skili false ef bókun verður ekki til
+     */
     @Test
     public void testCreateBooking2() {
         String user = "John";
@@ -45,9 +56,9 @@ public class newBookingTest {
         assertFalse(b);
     }
 
-
-
-
+    /**
+     * Hreinsar bókunina
+     */
     @After
     public void tearDown() {
         reset(mockBooking);

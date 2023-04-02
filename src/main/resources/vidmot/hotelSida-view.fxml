@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import vidmot.HotelSidaView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.HotelController">
+   <children>
+      <Button layoutX="252.0" layoutY="303.0" mnemonicParsing="false" onAction="#onHelloButtonClick" prefHeight="30.0" prefWidth="97.0" text="Velja" />
+      <Button layoutX="448.0" layoutY="70.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="68.0" text="Leita" />
+      <HotelSidaView layoutX="159.0" layoutY="104.0" prefHeight="193.0" prefWidth="281.0" />
+      <TextField layoutX="159.0" layoutY="70.0" prefHeight="26.0" prefWidth="281.0" />
+   </children>
+</AnchorPane>

@@ -10,8 +10,8 @@ import java.io.IOException;
 public class HotelApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HotelApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
+        FXMLLoader fxmlLoader = new FXMLLoader(HotelApplication.class.getResource("hotelSida-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Hótel Landsins!");
         stage.setScene(scene);
         stage.show();

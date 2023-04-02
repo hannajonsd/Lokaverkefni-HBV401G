@@ -1,7 +1,6 @@
 package vidmot;
 
 import vinnsla.Booking;
-import vinnsla.Hotel;
 
 import java.util.Date;
 

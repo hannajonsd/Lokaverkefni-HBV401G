@@ -1,9 +1,7 @@
 import org.junit.*;
 import vidmot.BookingController;
 import vinnsla.Booking;
-import vinnsla.Hotel;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 

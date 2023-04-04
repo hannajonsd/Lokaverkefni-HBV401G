@@ -49,6 +49,6 @@ public class Hotel {
         for (Hotel hotel : hotels) {
             hotelnames.add(hotel.getName());
         }
-        return hotelnames;}
-
+        return hotelnames;
+    }
 }

@@ -18,6 +18,6 @@ public class HotelSidaView extends ListView {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hotelSida-view.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-        setItems(h.getHotel());
+        setItems(h.getHotelNames());
     }
 }

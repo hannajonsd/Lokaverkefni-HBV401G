@@ -44,6 +44,11 @@ public class Hotel {
      *
      * @return skilar lista af veitingum, matseðlinum
      */
-    public ObservableList<Hotel> getHotel(){return hotels;}
-
+    public ObservableList<String> getHotelNames(){
+        ObservableList<String> hotelnames = FXCollections.observableArrayList();
+        for (Hotel hotel : hotels) {
+            hotelnames.add(hotel.getName());
+        }
+        return hotelnames;
+    }
 }

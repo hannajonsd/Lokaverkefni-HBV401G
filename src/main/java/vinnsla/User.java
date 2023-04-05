@@ -22,7 +22,7 @@ public class User {
     /**
      * Smiður fyrir viðskiptavin
      * @param nafn viðskiptavins
-     * @param mail heimilisfang viðskiptavins
+     * @param email heimilisfang viðskiptavins
      */
     public User(StringProperty nafn, StringProperty email, IntegerProperty kennitala) {
         this.nafn = nafn;

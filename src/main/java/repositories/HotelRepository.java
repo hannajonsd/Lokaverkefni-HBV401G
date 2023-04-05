@@ -1,5 +1,7 @@
 package repositories;
-import sqlite3;
+/*
+import sqlite3.*;
+
 
 public class HotelRepository implements Repository{
 
@@ -15,8 +17,9 @@ public class HotelRepository implements Repository{
 
     }
 
-    public String getReview(){
-
+    public void getReview(){
     }
 
 }
+
+ */

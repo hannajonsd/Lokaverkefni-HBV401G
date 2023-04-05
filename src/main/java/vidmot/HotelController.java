@@ -1,24 +1,20 @@
 package vidmot;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import vinnsla.Hotel;
 
+
+
 public class HotelController {
-    @FXML
-    private Label welcomeText;
 
     public ObservableList<Hotel> hotels;
 
 
     public HotelController() {
 
-    }
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Velkomin á heimasíðu Hótel Landsins");
     }
 
     public boolean searchHotels(String hotelName) {
@@ -33,5 +29,9 @@ public class HotelController {
 
     public void setHotels(ObservableList<Hotel> hotels) {
         this.hotels = hotels;
+    }
+
+    public void onVelja(ActionEvent actionEvent) {
+        System.out.print("ýtt á velja");
     }
 }

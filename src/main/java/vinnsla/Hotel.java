@@ -3,8 +3,21 @@ package vinnsla;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.Connection;
+
+
 public class Hotel {
     public String name;
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String about;
 
     public Hotel(String name){
         this.name= name;
@@ -22,33 +35,15 @@ public class Hotel {
     /**
      * Observable listi af veitingarhlutum sem fara á matseðilinn
      */
-    protected ObservableList<Hotel> hotels = FXCollections.observableArrayList();
+
 
 
     /**
      * Veitingarhlutir settir í matseðilslistann
      */
-    public Hotel(){ //listi af hotelum
-        hotels.add(new Hotel("Hotel Kopavogur"));
-        hotels.add(new Hotel("Hotel Hlidar"));
-        hotels.add(new Hotel("Hotel Sudurland"));
-        hotels.add(new Hotel("Hotel Akureyri"));
-        hotels.add(new Hotel("Hotel Snaefellsnes"));
-        hotels.add(new Hotel( "Hotel Hofn"));
-        hotels.add(new Hotel( "Adventure Hotel"));
-        hotels.add(new Hotel( "Ice Apartments"));
-        hotels.add(new Hotel( "Diamond Hotel"));
-    }
+    public Hotel(String name, String about){ //listi af hotelum
+        setAbout(about);
+        setName(name);
 
-    /**
-     *
-     * @return skilar lista af veitingum, matseðlinum
-     */
-    public ObservableList<String> getHotelNames(){
-        ObservableList<String> hotelnames = FXCollections.observableArrayList();
-        for (Hotel hotel : hotels) {
-            hotelnames.add(hotel.getName());
-        }
-        return hotelnames;
     }
 }

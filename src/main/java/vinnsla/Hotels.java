@@ -19,7 +19,7 @@ public class Hotels {
 
             // loop through the result set
             while (rs.next()) {
-                Hotel h = new Hotel(rs.getString("name unique not null primary key"), rs.getString("about"));
+                Hotel h = new Hotel(rs.getString("name"), rs.getString("about"));
                 hotels.add(h);
             }
         } catch (SQLException e) {
@@ -32,5 +32,8 @@ public class Hotels {
             hotelnames.add(hotel.getName());
         }
         return hotelnames;
+    }
+    public ObservableList<Hotel> getHotels(){
+        return hotels;
     }
 }

@@ -1,7 +1,6 @@
 package vidmot;
 
 public enum View {
-
         HEIMASIDA("hotelSida-view.fxml"),
 
         HOTEL("hotel-view.fxml"),
@@ -9,8 +8,6 @@ public enum View {
         INNSKRANING("user-view.fxml"),
 
         BOKUN("booking-view.fxml");
-
-
 
         private String filename;
 

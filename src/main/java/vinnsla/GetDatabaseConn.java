@@ -5,7 +5,7 @@ import java.sql.*;
 public class GetDatabaseConn {
     public Connection databaseLink;
     public Connection getDBconnection() {
-        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/sql/GG_5.db";
+        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/sql/GG_2.db";
 
         try {
             Class.forName("org.sqlite.JDBC");

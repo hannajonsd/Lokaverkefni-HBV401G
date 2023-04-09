@@ -13,6 +13,7 @@ public class Hotel {
     public boolean spa;
     public boolean wifi;
     public boolean restaurant;
+    public ObservableList<Review> reviews;
 
     public boolean isSpa() {
         return spa;
@@ -47,7 +48,7 @@ public class Hotel {
     }
 
     public boolean access;
-    public Hotel(String name, String about, ObservableList<Room> rooms, boolean spa, boolean wifi, boolean restaurant, boolean access) {
+    public Hotel(String name, String about, ObservableList<Room> rooms, boolean spa, boolean wifi, boolean restaurant, boolean access, ObservableList<Review> reviews) {
         this.name = name;
         this.about = about;
         this.rooms = rooms;
@@ -55,6 +56,7 @@ public class Hotel {
         this.wifi = wifi;
         this.restaurant = restaurant;
         this.access = access;
+        this.reviews= reviews;
     }
 
     public ObservableList<Room> getRooms() {
@@ -94,5 +96,9 @@ public class Hotel {
     @Override
     public String toString() {
         return name;
+    }
+
+    public ObservableList<Review> getReviews() {
+        return reviews;
     }
 }

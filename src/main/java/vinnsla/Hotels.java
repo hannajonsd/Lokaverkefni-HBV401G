@@ -24,13 +24,37 @@ public class Hotels {
                 boolean restaurant = rs.getBoolean("restaurant");
                 boolean wifi = rs.getBoolean("wifi");
                 boolean access = rs.getBoolean("access");
-                Hotel h = new Hotel(rs.getString("name"), rs.getString("about"), rooms, spa, wifi,  restaurant, access);
+                ObservableList<Review> reviews = getReviewsForHotel(rs.getString("name"));
+                Hotel h = new Hotel(rs.getString("name"), rs.getString("about"), rooms, spa, wifi,  restaurant, access, reviews);
                 hotels.add(h);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
+    private ObservableList<Review> getReviewsForHotel(String hotelName) {
+        ObservableList<Review> reviews = FXCollections.observableArrayList();
+        GetDatabaseConn dbconn = new GetDatabaseConn();
+        Connection conn = dbconn.getDBconnection();
+        String query = "SELECT * FROM review WHERE hotel = '" + hotelName + "'";
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            // loop through the result set
+            while (rs.next()) {
+                String comment = rs.getString("comments");
+                int stars = rs.getInt("stars");
+                Review review = new Review(comment, stars);
+                reviews.add(review);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reviews;
+    }
+
     public ObservableList<Room> getRoomsForHotel(String hotelName) {
         ObservableList<Room> rooms = FXCollections.observableArrayList();
         GetDatabaseConn dbconn = new GetDatabaseConn();

@@ -3,14 +3,14 @@ package vidmot;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import vinnsla.Hotel;
+import vinnsla.Review;
 import vinnsla.Room;
 
 import java.io.IOException;
@@ -98,4 +98,47 @@ public class HotelView {
     public ObjectProperty<Hotel> hotelProperty() {
         return hotel;
     }
+
+    public void getReviews(ActionEvent actionEvent) {
+        // Get the reviews from the hotel's observable list
+        ObservableList<Review> reviews = hotel.get().getReviews();
+
+        // Create a Dialog
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Reviews");
+        dialog.setHeaderText("All Reviews");
+
+        // Create a DialogPane
+        DialogPane dialogPane = new DialogPane();
+
+        // Create a ListView to display the reviews
+        ListView<Review> listView = new ListView<>();
+        listView.setItems(reviews);
+
+        // Set a cell factory to customize the appearance of each item in the ListView
+        listView.setCellFactory(param -> new ListCell<Review>() {
+            @Override
+            protected void updateItem(Review review, boolean empty) {
+                super.updateItem(review, empty);
+                if (empty || review == null) {
+                    setText(null);
+                } else {
+                    setText("Comment: " + review.getComment() + "\nStars: " + review.getStars());
+                }
+            }
+        });
+
+        // Add the ListView to the DialogPane
+        dialogPane.setContent(listView);
+
+        // Set the DialogPane as the content of the Dialog
+        dialog.setDialogPane(dialogPane);
+
+        // Add a "Close" button to the Dialog
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        // Show the Dialog
+        dialog.showAndWait();
+    }
+
 }

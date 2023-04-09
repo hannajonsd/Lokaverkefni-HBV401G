@@ -20,7 +20,11 @@ public class Hotels {
             // loop through the result set
             while (rs.next()) {
                 ObservableList<Room> rooms = getRoomsForHotel(rs.getString("name"));
-                Hotel h = new Hotel(rs.getString("name"), rs.getString("about"), rooms);
+                boolean spa = rs.getBoolean("spa");
+                boolean restaurant = rs.getBoolean("restaurant");
+                boolean wifi = rs.getBoolean("wifi");
+                boolean access = rs.getBoolean("access");
+                Hotel h = new Hotel(rs.getString("name"), rs.getString("about"), rooms, spa, wifi,  restaurant, access);
                 hotels.add(h);
             }
         } catch (SQLException e) {

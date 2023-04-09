@@ -20,14 +20,11 @@ public class HotelView {
     public Label hotelname;
     @FXML
     public Label fxAbout;
-    private  HotelController hotelController;
+    public Label addOns;
     @FXML
     public ListView<Room> rooms;
     private ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
 
-    public void setHotelController(HotelController hotelController) {
-        this.hotelController = hotelController;
-    }
 
     public void initialize(){
         hotel.bind(HotelController.hotelProperty());
@@ -35,16 +32,39 @@ public class HotelView {
             hotelname.setText(hotel.get().getName());
             fxAbout.setText(hotel.get().getAbout());
             rooms.setItems(hotel.get().getRooms());
+            setAddOns(hotel.get());
         }
         hotelProperty().addListener((observable, oldValue, newValue) -> {
-            // Update the UI with the new values
             if (newValue != null) {
                 System.out.print(newValue);
                 hotelname.setText(newValue.getName());
                 fxAbout.setText(newValue.getAbout());
                 rooms.setItems(newValue.getRooms());
+                setAddOns(newValue);
             }
         });
+    }
+
+    private void setAddOns(Hotel hotel) {
+        if(!hotel.isWifi()&& !hotel.isSpa() && !hotel.isAccess()&& !hotel.isResturant()){
+            addOns.setText("Engin auka fríðindi");
+        }
+        else{
+        String addOns = "Auka fríðindi: ";
+        if(hotel.isResturant()){
+            addOns+= " Það er veitigastaður.";
+        }
+        if(hotel.isWifi()){
+            addOns+= " Frítt wifi.";
+        }
+        if(hotel.isSpa()){
+            addOns+= " Það er spa.";
+        }
+        if(hotel.isAccess()){
+            addOns+= " Það er aðgegni fyrir hreyfihamlaða.";
+        }
+        this.addOns.setText(addOns);
+        }
     }
 
     public Hotel getHotel() {

@@ -19,12 +19,36 @@ public class Hotels {
 
             // loop through the result set
             while (rs.next()) {
-                Hotel h = new Hotel(rs.getString("name"), rs.getString("about"));
+                ObservableList<Room> rooms = getRoomsForHotel(rs.getString("name"));
+                Hotel h = new Hotel(rs.getString("name"), rs.getString("about"), rooms);
                 hotels.add(h);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    public ObservableList<Room> getRoomsForHotel(String hotelName) {
+        ObservableList<Room> rooms = FXCollections.observableArrayList();
+        GetDatabaseConn dbconn = new GetDatabaseConn();
+        Connection conn = dbconn.getDBconnection();
+        String query = "SELECT * FROM room WHERE hotel = '" + hotelName + "'";
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            // loop through the result set
+            while (rs.next()) {
+                String roomNumber = rs.getString("roomnumber");
+                String type = rs.getString("type");
+                double price = rs.getDouble("price");
+                String size = rs.getString("size");
+                Room room = new Room(roomNumber, type, price, size);
+                rooms.add(room);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return rooms;
     }
     public ObservableList<String> getHotelNames(){
         ObservableList<String> hotelnames = FXCollections.observableArrayList();

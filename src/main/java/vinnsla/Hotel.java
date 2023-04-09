@@ -8,6 +8,16 @@ import java.sql.Connection;
 
 public class Hotel {
     public String name;
+    public String about;
+    public ObservableList<Room> rooms;
+
+    public ObservableList<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(ObservableList<Room> rooms) {
+        this.rooms = rooms;
+    }
 
     public String getAbout() {
         return about;
@@ -17,7 +27,7 @@ public class Hotel {
         this.about = about;
     }
 
-    public String about;
+
 
     public Hotel(String name){
         this.name= name;
@@ -41,9 +51,13 @@ public class Hotel {
     /**
      * Veitingarhlutir settir í matseðilslistann
      */
-    public Hotel(String name, String about){ //listi af hotelum
+    public Hotel(String name, String about, ObservableList<Room> rooms){ //listi af hotelum
         setAbout(about);
         setName(name);
-
+        setRooms(rooms);
+    }
+    @Override
+    public String toString() {
+        return name;
     }
 }

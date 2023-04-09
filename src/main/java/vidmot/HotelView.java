@@ -1,31 +1,58 @@
 package vidmot;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import vinnsla.Hotel;
+import vinnsla.Room;
+
+import java.io.IOException;
 
 public class HotelView {
-
-    public ListView fxrooms;
     @FXML
     public Label hotelname;
     @FXML
     public Label fxAbout;
+    private  HotelController hotelController;
+    @FXML
+    public ListView<Room> rooms;
+    private ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
+
+    public void setHotelController(HotelController hotelController) {
+        this.hotelController = hotelController;
+    }
 
     public void initialize(){
-        Hotel hotel= HotelController.hotel;
-        hotelname.setText(hotel.getName());
-        fxAbout.setText(hotel.getAbout());
+        hotel.bind(HotelController.hotelProperty());
+        if(hotel.get()!= null) {
+            hotelname.setText(hotel.get().getName());
+            fxAbout.setText(hotel.get().getAbout());
+            rooms.setItems(hotel.get().getRooms());
+        }
+        hotelProperty().addListener((observable, oldValue, newValue) -> {
+            // Update the UI with the new values
+            if (newValue != null) {
+                System.out.print(newValue);
+                hotelname.setText(newValue.getName());
+                fxAbout.setText(newValue.getAbout());
+                rooms.setItems(newValue.getRooms());
+            }
+        });
     }
 
-    public ListView getFxrooms() {
-        return fxrooms;
+    public Hotel getHotel() {
+        return hotel.get();
     }
 
-    public void setFxrooms(ListView fxrooms) {
-        this.fxrooms = fxrooms;
+    public void setHotel(Hotel hotel) {
+        this.hotel.set(hotel);
     }
 
     public String getHotelname() {
@@ -43,9 +70,12 @@ public class HotelView {
     public void setFxAbout(String about) {
         fxAbout.setText(about);
     }
-
-    public void goHome(){
+    @FXML
+    void goHome(){
 
         ViewSwitcher.switchTo(View.HEIMASIDA);
+    }
+    public ObjectProperty<Hotel> hotelProperty() {
+        return hotel;
     }
 }

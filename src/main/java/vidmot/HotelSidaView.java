@@ -5,7 +5,7 @@ import javafx.scene.control.ListView;
 import vinnsla.Hotel;
 import vinnsla.Hotels;
 
-public class HotelSidaView extends ListView {
+public class HotelSidaView extends ListView<Hotel> {
     /**
      * Local hlutur fyrir hotelið
      */
@@ -19,6 +19,6 @@ public class HotelSidaView extends ListView {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hotelSida-view.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-        setItems(h.getHotelNames());
+        setItems(h.getHotels());
     }
 }

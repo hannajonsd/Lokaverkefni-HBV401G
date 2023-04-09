@@ -1,17 +1,30 @@
 package vidmot;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.control.Label;
 import vinnsla.Booking;
+import vinnsla.Room;
 
 import java.util.Date;
+
+import static vidmot.HotelView.roomProperty;
 
 public class BookingController {
     public Booking bk;
 
-    public BookingController(Booking booking) {
-        bk = booking;
-    }
-
-    public boolean createBooking(String hotel, String user, int roomnumber, Date start, Date end){
-       return bk.createBooking(hotel, user, roomnumber, start, end);
+    public Label fxRoom;
+    public ObjectProperty<Room> room= new SimpleObjectProperty<>();
+    public void initialize(){
+        room.bind(roomProperty());
+        if (room.get() != null) {
+           fxRoom.setText(room.get().toString());
+        }
+        roomProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                System.out.print(newValue);
+                fxRoom.setText(newValue.toString());
+            }
+        });
     }
 }

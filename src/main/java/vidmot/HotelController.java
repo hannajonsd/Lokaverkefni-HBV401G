@@ -1,11 +1,13 @@
 package vidmot;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import vinnsla.GetDatabaseConn;
 import vinnsla.Hotel;
@@ -18,6 +20,11 @@ public class HotelController {
     public HotelSidaView hotels;
     private static ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
     public HotelView hotelView;
+    public Button fxVelja;
+
+    public void initialize(){
+        fxVelja.disableProperty().bind(Bindings.isEmpty(hotels.getSelectionModel().getSelectedItems()));
+    }
 
 
     public boolean searchHotels(String hotelName) {

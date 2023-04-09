@@ -3,17 +3,14 @@ package vidmot;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import vinnsla.Hotel;
 import vinnsla.Review;
 import vinnsla.Room;
-
-import java.io.IOException;
 
 public class HotelView {
     @FXML
@@ -22,11 +19,14 @@ public class HotelView {
     public Label fxAbout;
     public Label addOns;
     @FXML
-    public ListView<Room> rooms;
+    public ListView<Room> rooms ;
+    public Button fxBook;
     private ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
+    public static ObjectProperty<Room> room= new SimpleObjectProperty<>();
 
 
     public void initialize(){
+        fxBook.disableProperty().bind(Bindings.isEmpty(rooms.getSelectionModel().getSelectedItems()));
         hotel.bind(HotelController.hotelProperty());
         if(hotel.get()!= null) {
             hotelname.setText(hotel.get().getName());
@@ -105,8 +105,8 @@ public class HotelView {
 
         // Create a Dialog
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Reviews");
-        dialog.setHeaderText("All Reviews");
+        dialog.setTitle("Umsagnir");
+        dialog.setHeaderText("Allar Umsagnir");
 
         // Create a DialogPane
         DialogPane dialogPane = new DialogPane();
@@ -123,7 +123,7 @@ public class HotelView {
                 if (empty || review == null) {
                     setText(null);
                 } else {
-                    setText("Comment: " + review.getComment() + "\nStars: " + review.getStars());
+                    setText("Umsögn: " + review.getComment() + "\nStjörnur: " + review.getStars());
                 }
             }
         });
@@ -141,4 +141,16 @@ public class HotelView {
         dialog.showAndWait();
     }
 
+    public void book() {
+        setRoom( rooms.getSelectionModel().getSelectedItem());
+        ViewSwitcher.switchTo(View.BOKUN);
+    }
+
+    private void setRoom(Room selectedItem) {
+        room.set(selectedItem);
+    }
+
+    public static ObservableValue<Room> roomProperty() {
+        return room;
+    }
 }

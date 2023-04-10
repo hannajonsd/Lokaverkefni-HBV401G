@@ -45,7 +45,7 @@ public class UserDialog extends Dialog<User> {
      * Upphafsstilling, þegar í lagi hnappurinn er valinn þá er nýr viðskiptavinur búin til
      */
 
-    public UserDialog(){
+    public UserDialog() {
         setDialogPane(readUser());
 
         iLagiRegla();
@@ -63,16 +63,14 @@ public class UserDialog extends Dialog<User> {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
                         alert.setHeaderText(null);
-                        alert.setContentText("The name already exists!");
-                        alert.showAndWait();
+                        alert.setContentText("Nafn í notkun!");
                         return null;
                     }
-                }else {
+                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
-                    alert.setContentText("Passwords do not match!");
-                    alert.showAndWait();
+                    alert.setContentText("Lykilorð ekki í samræmi!");
                     return null;
                 }
 
@@ -81,6 +79,7 @@ public class UserDialog extends Dialog<User> {
             }
         });
     }
+
 
 
     /**
@@ -111,6 +110,6 @@ public class UserDialog extends Dialog<User> {
      */
     public void iLagiRegla(){
         Node iLagi = getDialogPane().lookupButton(fxILagi);
-        iLagi.disableProperty().bind(fxNafn.textProperty().isEmpty().or(fxEmail.textProperty().isEmpty()).or(fxKennitala.textProperty().isEmpty()));
+        iLagi.disableProperty().bind(fxNafn.textProperty().isEmpty().or(fxEmail.textProperty().isEmpty()).or(fxKennitala.textProperty().isEmpty()).or(fxPassword.textProperty().isEmpty()).or(fxPasswordConfirm.textProperty().isEmpty()));
     }
 }

@@ -6,7 +6,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +22,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class HotelController {
@@ -35,9 +35,9 @@ public class HotelController {
     public Button fxRegister;
     public Button fxLogin;
 
-    public void initialize(){
-        UserDialog ud=new UserDialog();
-        user= ud.getUser();
+    public void initialize() {
+        UserDialog ud = new UserDialog();
+        user = ud.getUser();
         fxVelja.disableProperty().bind(Bindings.isEmpty(hotels.getSelectionModel().getSelectedItems()));
     }
 
@@ -58,6 +58,7 @@ public class HotelController {
         this.hotels = (HotelSidaView) hotels;
 
     }
+
     public Hotel getHotel() {
         return hotel.get();
     }
@@ -73,13 +74,13 @@ public class HotelController {
 
     public void onVelja(ActionEvent actionEvent) throws IOException {
 
-        setHotel( hotels.getSelectionModel().getSelectedItem());
+        setHotel(hotels.getSelectionModel().getSelectedItem());
         ViewSwitcher.switchTo(View.HOTEL);
     }
 
     public void register() {
-        UserDialog ud= new UserDialog();
-        user= ud.getUser();
+        UserDialog ud = new UserDialog();
+        user = ud.getUser();
     }
 
     public void login() {
@@ -91,17 +92,14 @@ public class HotelController {
         dialog.setTitle("Innskráning");
         dialog.setHeaderText("Skráðu inn nafn og lykilorð");
 
-        // Set the button types
         ButtonType loginButtonType = new ButtonType("Innskrá", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 
-        // Create the GridPane for the custom content
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new javafx.geometry.Insets(20));
 
-        // Create two text fields
         TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
         grid.add(new Label("Nafn:"), 0, 0);
@@ -121,22 +119,33 @@ public class HotelController {
             return null;
         });
 
-        Optional<Pair<String, String>> result = dialog.showAndWait();
 
-        result.ifPresent(values -> {
-            String username = values.getKey();
-            String password = values.getValue();
-            if (!isUsernameIndb(username)) {
-                dialog.setHeaderText("Notendanafn ekki til");
-            } else if(!doPasswordMatch(password, username)){
-                dialog.setHeaderText("Vitlaust lykilorð");
-            }else{
-                user= getUserbyName(username);
-                System.out.println(user);
+        AtomicBoolean closeDialog = new AtomicBoolean(false); // Flag to determine if dialog should be closed
+
+        while (!closeDialog.get()) { // Loop to keep the dialog open if needed
+            Optional<Pair<String, String>> result = dialog.showAndWait();
+
+            result.ifPresent(values -> {
+                String username = values.getKey();
+                String password = values.getValue();
+                if (!isUsernameInDb(username)) {
+                    dialog.setHeaderText("Notendanafn ekki til");
+                } else if (!doPasswordMatch(password, username)) {
+                    dialog.setHeaderText("Vitlaust lykilorð");
+                } else {
+                    user = getUserByName(username);
+                    System.out.println(user);
+                    closeDialog.set(true); // Set flag to close dialog
+                }
+            });
+
+            // If result is not present, dialog was cancelled, set flag to close dialog
+            if (result.isEmpty()) {
+                closeDialog.set(true);
             }
-        });
+        }
     }
-    public boolean isUsernameIndb(String username) {
+    public boolean isUsernameInDb(String username) {
         GetDatabaseConn dbconn = new GetDatabaseConn();
         Connection conn = dbconn.getDBconnection();
         String query = "SELECT * FROM user WHERE name=?";
@@ -167,7 +176,7 @@ public class HotelController {
         }
     }
 
-    public User getUserbyName(String username) {
+    public User getUserByName(String username) {
         GetDatabaseConn dbconn = new GetDatabaseConn();
         Connection conn = dbconn.getDBconnection();
         String query = "SELECT * FROM user WHERE name=?";

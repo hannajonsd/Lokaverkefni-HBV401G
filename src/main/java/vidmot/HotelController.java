@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import vinnsla.GetDatabaseConn;
 import vinnsla.Hotel;
+import vinnsla.User;
 
 import java.io.IOException;
 
@@ -21,9 +22,14 @@ public class HotelController {
     private static ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
     public HotelView hotelView;
     public Button fxVelja;
+    public User user;
+    public Button fxRegister;
 
     public void initialize(){
+        UserDialog ud = new UserDialog();
+        user= ud.getUser();
         fxVelja.disableProperty().bind(Bindings.isEmpty(hotels.getSelectionModel().getSelectedItems()));
+
     }
 
 
@@ -60,6 +66,11 @@ public class HotelController {
 
         setHotel( hotels.getSelectionModel().getSelectedItem());
         ViewSwitcher.switchTo(View.HOTEL);
+    }
+
+    public void register(ActionEvent actionEvent) {
+        UserDialog ud = new UserDialog();
+        user= ud.getUser();
     }
 }
 

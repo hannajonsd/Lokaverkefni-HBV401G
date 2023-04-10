@@ -1,5 +1,6 @@
 package vidmot;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -27,6 +28,12 @@ public class UserDialog extends Dialog<User> {
     @FXML
     public TextField fxKennitala;
 
+    @FXML
+    public TextField fxPassword;
+
+    @FXML
+    public TextField fxPasswordConfirm;
+
     /**
      * Hnappurinn sem viðskiptarvinu ýtir á þegar hann hefur sett inn upplýsingarnar sínar
      */
@@ -34,8 +41,9 @@ public class UserDialog extends Dialog<User> {
     public ButtonType fxILagi;
 
 
-    /**
+    /*
      * Upphafsstilling, þegar í lagi hnappurinn er valinn þá er nýr viðskiptavinur búin til
+     */
 
     public UserDialog(){
         setDialogPane(readUser());
@@ -44,13 +52,36 @@ public class UserDialog extends Dialog<User> {
 
         setResultConverter(buttonType -> {
             if(buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE){
-                return new User(fxNafn.textProperty(), fxEmail.textProperty(), fxKennitala.textProperty());
+                if(fxPassword.getText().equals(fxPasswordConfirm.getText()))  {
+                    System.out.println("user okey");
+                    User user = new User(fxNafn.textProperty(), fxEmail.textProperty(), fxKennitala.textProperty(), fxPassword.textProperty());
+                    boolean isNameUnique = user.isNameUnique();
+                    if (isNameUnique) {
+                        user.addUserDb();
+                        return user;
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("The name already exists!");
+                        alert.showAndWait();
+                        return null;
+                    }
+                }else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Passwords do not match!");
+                    alert.showAndWait();
+                    return null;
+                }
+
             } else {
                 return null;
             }
         });
     }
-     */
+
 
     /**
      * Býr til dialogið fyrir innskráningu

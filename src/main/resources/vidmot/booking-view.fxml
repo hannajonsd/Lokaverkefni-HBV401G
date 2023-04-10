@@ -9,6 +9,6 @@
       <DatePicker layoutX="268.0" layoutY="116.0" />
       <Label alignment="CENTER" layoutX="299.0" layoutY="60.0" prefHeight="26.0" prefWidth="126.0" text="Veljið dagsetningu" textAlignment="CENTER" />
       <Label layoutX="62.0" layoutY="57.0" prefHeight="25.0" prefWidth="137.0" text="Herbergi:" />
-      <Label fx:id="fxRoom" wrapText="true" layoutX="62.0" layoutY="111.0" prefHeight="26.0" prefWidth="177.0" />
+      <Label fx:id="fxRoom" layoutX="62.0" layoutY="111.0" prefHeight="61.0" prefWidth="177.0" wrapText="true" />
    </children>
 </AnchorPane>

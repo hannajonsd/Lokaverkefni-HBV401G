@@ -1,13 +1,47 @@
 package vinnsla;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class User {
+import java.sql.*;
 
-    private StringProperty nafn = new SimpleStringProperty();
+public class User {
+    private StringProperty nafn;
+    private StringProperty email;
+    private StringProperty password;
+    private StringProperty kennitala;
+
+
+    /**
+     * Smiður fyrir viðskiptavin
+     * @param nafn viðskiptavins
+     * @param email heimilisfang viðskiptavins
+     * @param kennitala
+     */
+    public User(StringProperty nafn, StringProperty email, StringProperty kennitala, StringProperty password) {
+        this.nafn = nafn;
+        this.email = email;
+        this.kennitala = kennitala;
+        this.password = password;
+    }
+
+    public void addUserDb(){
+        GetDatabaseConn dbconn = new GetDatabaseConn();
+        Connection conn = dbconn.getDBconnection();
+        String query = "INSERT INTO user (name, ssn, email, password) VALUES (?, ?, ?, ?)";
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, nafn.get());
+            pstmt.setString(2, kennitala.get());
+            pstmt.setString(3, email.get());
+            pstmt.setString(4, password.get());
+            pstmt.executeUpdate();
+            System.out.println("user inserted into table");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getNafn() {
         return nafn.get();
     }
@@ -18,19 +52,6 @@ public class User {
     public void setNafn(String nafn) {
         this.nafn.set(nafn);
     }
-
-    /**
-     * Smiður fyrir viðskiptavin
-     * @param nafn viðskiptavins
-     * @param email heimilisfang viðskiptavins
-     */
-    public User(StringProperty nafn, StringProperty email, IntegerProperty kennitala) {
-        this.nafn = nafn;
-        this.email = email;
-        this.kennitala = kennitala;
-    }
-
-    private StringProperty email = new SimpleStringProperty();
 
     public String getEmail() {
         return email.get();
@@ -43,17 +64,32 @@ public class User {
         this.email.set(email);
     }
 
-    private IntegerProperty kennitala = new SimpleIntegerProperty();
 
-    public int getKennitala() {
+
+    public String getKennitala() {
         return kennitala.get();
     }
 
-    public IntegerProperty kennitalaProperty() {
+    public StringProperty kennitalaProperty() {
         return kennitala;
     }
 
     public void setKennitala(int kennitala) {
-        this.kennitala.set(kennitala);
+        this.kennitala.set(String.valueOf(kennitala));
+    }
+
+    public boolean isNameUnique() {
+        GetDatabaseConn dbconn = new GetDatabaseConn();
+        Connection conn = dbconn.getDBconnection();
+        String query = "SELECT * FROM user WHERE name=?";
+        try{
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nafn.get());
+            ResultSet rs = stmt.executeQuery();
+            return !rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

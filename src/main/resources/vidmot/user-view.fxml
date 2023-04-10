@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.PasswordField?>
 <DialogPane headerText="&#10;    Nýskráning fer fram hér, ýttu á hætta við ef þú ert núþegar með aðgang" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <VBox layoutX="14.0" layoutY="15.0" prefHeight="300.0" prefWidth="352.0" spacing="15.0">
@@ -64,11 +65,11 @@
                         <Insets top="35.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="fxPassword" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="219.0" promptText="Skrifaðu lykilorð">
+                  <PasswordField fx:id="fxPassword" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="219.0" promptText="Skrifaðu lykilorð">
                      <HBox.margin>
                         <Insets  left="20.0" top="35.0" />
                      </HBox.margin>
-                  </TextField>
+                  </PasswordField>
                </children>
             </HBox>
             <HBox prefHeight="0.0" prefWidth="349.0">
@@ -78,11 +79,11 @@
                         <Insets top="45.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="fxPasswordConfirm" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="219.0" promptText="Staðfesta lykilorð">
+                  <PasswordField fx:id="fxPasswordConfirm" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="219.0" promptText="Staðfesta lykilorð">
                      <HBox.margin>
                         <Insets  left="20.0" top="45.0" />
                      </HBox.margin>
-                  </TextField>
+                  </PasswordField>
                </children>
             </HBox>
          </children>

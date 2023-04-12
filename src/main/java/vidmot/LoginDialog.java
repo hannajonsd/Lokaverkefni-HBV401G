@@ -37,9 +37,17 @@ public class LoginDialog extends Dialog<User>{
                 String password = passwordField.getText();
                 if (!isUsernameInDb(username)) {
                     setHeaderText("Nafn ekki til");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Nafn ekki til");
                 } else if (doPasswordMatch(username, password)) {
                     setHeaderText("Vitlaust lykilorð");
-
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Vitlaust lykilorð");
+                    return null;
                 } else {
                     User user = getUserByName(username);
                     System.out.println(user);

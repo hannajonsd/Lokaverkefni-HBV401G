@@ -2,11 +2,9 @@ package vidmot;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.util.Pair;
 import vinnsla.GetDatabaseConn;
 import vinnsla.User;
 

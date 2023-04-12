@@ -8,9 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import vinnsla.Hotel;
 import vinnsla.Review;
 import vinnsla.Room;
@@ -103,22 +100,17 @@ public class HotelView {
     }
 
     public void getReviews(ActionEvent actionEvent) {
-        // Get the reviews from the hotel's observable list
         ObservableList<Review> reviews = hotel.get().getReviews();
 
-        // Create a Dialog
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Umsagnir");
         dialog.setHeaderText("Allar Umsagnir");
 
-        // Create a DialogPane
         DialogPane dialogPane = new DialogPane();
 
-        // Create a ListView to display the reviews
         ListView<Review> listView = new ListView<>();
         listView.setItems(reviews);
 
-        // Set a cell factory to customize the appearance of each item in the ListView
         listView.setCellFactory(param -> new ListCell<Review>() {
             @Override
             protected void updateItem(Review review, boolean empty) {
@@ -132,17 +124,9 @@ public class HotelView {
             }
         });
         listView.setPrefWidth(400);
-
-        // Add the ListView to the DialogPane
         dialogPane.setContent(listView);
-
-        // Set the DialogPane as the content of the Dialog
         dialog.setDialogPane(dialogPane);
-
-        // Add a "Close" button to the Dialog
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-
-        // Show the Dialog
         dialog.showAndWait();
     }
 

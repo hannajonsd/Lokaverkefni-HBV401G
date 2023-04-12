@@ -39,14 +39,15 @@ public class LoginDialog extends Dialog<User>{
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText("Nafn ekki til");
-                    return null;
+                    alert.showAndWait();
                 } else if (doPasswordMatch(username, password)) {
                     setHeaderText("Vitlaust lykilorð");
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText("Vitlaust lykilorð");
-                    return null;
+                    alert.showAndWait();
+
                 } else {
                     User user = getUserByName(username);
                     System.out.println(user);

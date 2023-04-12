@@ -75,8 +75,17 @@ public class HotelController {
     }
 
     public void onVelja(){
-        setHotel(hotels.getSelectionModel().getSelectedItem());
-        ViewSwitcher.switchTo(View.HOTEL);
+        if(user==null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Innskráðu þig");
+            alert.setHeaderText(null);
+            alert.setContentText("Þarft að vera innsrkáður til að velja hótel");
+            alert.showAndWait();
+        }
+        else {
+            setHotel(hotels.getSelectionModel().getSelectedItem());
+            ViewSwitcher.switchTo(View.HOTEL);
+        }
     }
 
     public void login() {

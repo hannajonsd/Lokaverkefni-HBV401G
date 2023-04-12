@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import vinnsla.Hotel;
 import vinnsla.Review;
 import vinnsla.Room;
@@ -19,7 +20,15 @@ public class HotelView {
     public Label fxAbout;
     public Label addOns;
     @FXML
-    public ListView<Room> rooms ;
+    public TableView<Room> rooms;
+    @FXML
+    private TableColumn<Room, Integer> roomNumberColumn;
+    @FXML
+    private TableColumn<Room, String> sizeColumn;
+    @FXML
+    private TableColumn<Room, Double> priceColumn;
+    @FXML
+    private TableColumn<Room, String> typeColumn;
     public Button fxBook;
     private final ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
     public static ObjectProperty<Room> room= new SimpleObjectProperty<>();
@@ -43,6 +52,10 @@ public class HotelView {
                 setAddOns(newValue);
             }
         });
+        roomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+        sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
     }
 
     private void setAddOns(Hotel hotel) {

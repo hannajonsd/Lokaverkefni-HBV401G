@@ -64,19 +64,20 @@ public class UserDialog extends Dialog<User> {
                         alert.setTitle("Error");
                         alert.setHeaderText(null);
                         alert.setContentText("Nafn í notkun!");
-                        return null;
+                        alert.showAndWait();
                     }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText("Lykilorð ekki í samræmi!");
-                    return null;
+                    alert.showAndWait();
                 }
 
             } else {
                 return null;
             }
+            return null;
         });
     }
 

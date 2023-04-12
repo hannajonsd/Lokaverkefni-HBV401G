@@ -4,11 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.Button?>
 <AnchorPane prefHeight="400.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.BookingController">
    <children>
       <DatePicker layoutX="268.0" layoutY="116.0" />
       <Label alignment="CENTER" layoutX="299.0" layoutY="60.0" prefHeight="26.0" prefWidth="126.0" text="Veljið dagsetningu" textAlignment="CENTER" />
       <Label layoutX="62.0" layoutY="57.0" prefHeight="25.0" prefWidth="137.0" text="Herbergi:" />
       <Label fx:id="fxRoom" layoutX="62.0" layoutY="111.0" prefHeight="61.0" prefWidth="177.0" wrapText="true" />
+      <Button layoutX="30.0" layoutY="356.0" mnemonicParsing="false" onAction="#goHome" text="Heim" />
+      <Button layoutX="90.0" layoutY="356.0" mnemonicParsing="false" onAction="#goBack" text="Til baka" />
    </children>
 </AnchorPane>

@@ -1,62 +1,60 @@
 package vidmot;
 
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.util.Pair;
-import vinnsla.GetDatabaseConn;
 import vinnsla.Hotel;
 import vinnsla.User;
-
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Predicate;
 
 
 public class HotelController {
     @FXML
     public HotelSidaView hotels;
-    private static ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
-    public HotelView hotelView;
+    private static final ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
     @FXML
     public Button fxVelja;
     public User user;
     @FXML
-    public Button fxRegister;
-    @FXML
     public Button fxLogin;
     @FXML
     public Label fxUser;
+    @FXML
+    public ChoiceBox<String> filterChoiceBox;
+    @FXML
+    public TextField searchHotelField;
+
+    private FilteredList<Hotel> hotelList;
+
 
     public void initialize() {
         textDialog();
         fxVelja.disableProperty().bind(Bindings.isEmpty(hotels.getSelectionModel().getSelectedItems()));
+        hotelList = new FilteredList<>(hotels.getItems());
     }
 
+    @FXML
+    private void filterHotels() {
+        String selectedOption =  filterChoiceBox.getValue().toLowerCase();
 
-    public boolean searchHotels(String hotelName) {
-        /*
-        for (Hotel hotel : hotels) {
-            if (hotel.getName().equalsIgnoreCase(hotelName)) {
-                return true;
-            }
+        Predicate<Hotel> filterPredicate = hotel ->
+                (hotel.isRestaurant() && "restaurant".contains(selectedOption))
+                        || (hotel.isSpa() && "spa".contains(selectedOption))
+                        || (hotel.isWifi() && "wifi".contains(selectedOption))
+                        || (hotel.isAccess() && "access".contains(selectedOption));
+
+        if("all".contains(selectedOption)){
+            filterPredicate=null;
         }
-
-         */
-        return false;
+        hotelList.setPredicate(filterPredicate);
+        hotels.setHotels(hotelList);
     }
+
+
 
     public void setHotels(ObservableList<Hotel> hotels) {
         this.hotels = (HotelSidaView) hotels;
@@ -76,8 +74,7 @@ public class HotelController {
         return hotel;
     }
 
-    public void onVelja(ActionEvent actionEvent) throws IOException {
-
+    public void onVelja(){
         setHotel(hotels.getSelectionModel().getSelectedItem());
         ViewSwitcher.switchTo(View.HOTEL);
     }
@@ -86,7 +83,7 @@ public class HotelController {
         textDialog();
     }
     public void updateUserName() {
-        fxUser.setText(user.getNafn());
+        fxUser.setText(user.getName());
     }
 
     public void textDialog() {
@@ -95,6 +92,20 @@ public class HotelController {
         if(user!=null){
             updateUserName();
         }
+    }
+
+    @FXML
+    public void searchHotels() {
+        String filterText = searchHotelField.getText().toLowerCase();
+        Predicate<Hotel> filterPredicate = hotel ->
+                (hotel.isRestaurant() || hotel.isSpa() || hotel.isAccess() || hotel.isWifi())
+                        && hotel.getName().toLowerCase().contains(filterText);
+
+        if (filterText.isEmpty()) {
+            filterPredicate= null;
+        }
+        hotelList.setPredicate(filterPredicate);
+        hotels.setHotels(hotelList);
     }
 }
 

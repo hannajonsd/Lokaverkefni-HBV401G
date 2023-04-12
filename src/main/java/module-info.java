@@ -6,4 +6,5 @@ module com.example.lokaverkefnihbv401g {
 
     opens vidmot to javafx.fxml;
     exports vidmot;
+    exports vinnsla;
 }

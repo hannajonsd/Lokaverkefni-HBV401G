@@ -8,6 +8,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import vinnsla.Hotel;
 import vinnsla.Review;
 import vinnsla.Room;
@@ -21,7 +24,7 @@ public class HotelView {
     @FXML
     public ListView<Room> rooms ;
     public Button fxBook;
-    private ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
+    private final ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
     public static ObjectProperty<Room> room= new SimpleObjectProperty<>();
 
 
@@ -124,9 +127,11 @@ public class HotelView {
                     setText(null);
                 } else {
                     setText("Umsögn: " + review.getComment() + "\nStjörnur: " + review.getStars());
+                    setWrapText(true);
                 }
             }
         });
+        listView.setPrefWidth(400);
 
         // Add the ListView to the DialogPane
         dialogPane.setContent(listView);

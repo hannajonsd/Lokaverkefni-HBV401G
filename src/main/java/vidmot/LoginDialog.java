@@ -41,6 +41,7 @@ public class LoginDialog extends Dialog<User>{
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText("Nafn ekki til");
+                    return null;
                 } else if (doPasswordMatch(username, password)) {
                     setHeaderText("Vitlaust lykilorð");
                     Alert alert = new Alert(Alert.AlertType.ERROR);

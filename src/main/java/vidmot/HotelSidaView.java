@@ -1,24 +1,27 @@
 package vidmot;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import vinnsla.Hotel;
 import vinnsla.Hotels;
 
 public class HotelSidaView extends ListView<Hotel> {
-    /**
-     * Local hlutur fyrir hotelið
-     */
-    private Hotels h;
 
     /**
      * Hotellistinn búinn til
      */
     public HotelSidaView(){
-        h = new Hotels();
+        /**
+         * Local hlutur fyrir hotelið
+         */
+        Hotels h = new Hotels();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hotelSida-view.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         setItems(h.getHotels());
+    }
+    public void setHotels(ObservableList<Hotel> hotels){
+        setItems(hotels);
     }
 }

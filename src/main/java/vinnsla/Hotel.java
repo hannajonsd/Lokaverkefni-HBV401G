@@ -101,4 +101,8 @@ public class Hotel {
     public ObservableList<Review> getReviews() {
         return reviews;
     }
+
+    public boolean isRestaurant() {
+        return restaurant;
+    }
 }

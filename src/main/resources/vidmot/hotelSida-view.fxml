@@ -5,14 +5,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import vidmot.HotelSidaView?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.HotelController">
    <children>
-      <Button fx:id="fxVelja" layoutX="252.0" layoutY="303.0" mnemonicParsing="false" onAction="#onVelja" prefHeight="30.0" prefWidth="97.0" text="Velja" />
-      <Button layoutX="448.0" layoutY="70.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="68.0" text="Leita" />
+      <Button fx:id="fxVelja" layoutX="252.0" layoutY="350.0" mnemonicParsing="false" onAction="#onVelja" prefHeight="30.0" prefWidth="97.0" text="Velja" />
+      <Button onAction="#searchHotels" layoutX="448.0" layoutY="70.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="68.0" text="Leita" />
+      <TextField fx:id="searchHotelField" layoutX="159.0" layoutY="70.0" prefHeight="26.0" prefWidth="281.0" />
       <HotelSidaView fx:id="hotels" layoutX="159.0" layoutY="104.0" prefHeight="193.0" prefWidth="281.0" />
-      <TextField layoutX="159.0" layoutY="70.0" prefHeight="26.0" prefWidth="281.0" />
+      <ChoiceBox fx:id="filterChoiceBox" onAction="#filterHotels" layoutX="159.0" layoutY="303.0" prefHeight="26.0" prefWidth="281.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="All" />
+               <String fx:value="Spa" />
+               <String fx:value="Restaurant" />
+               <String fx:value="Wifi" />
+               <String fx:value="Access" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
       <Button fx:id="fxLogin" layoutX="500.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" onAction="#login" prefWidth="100.0" text="Innskráning" />
-      <Label fx:id="fxUser" layoutX="10.0" layoutY="10.0" text="" />
    </children>
 </AnchorPane>

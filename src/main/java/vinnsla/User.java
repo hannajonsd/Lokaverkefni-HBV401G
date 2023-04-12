@@ -1,27 +1,26 @@
 package vinnsla;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.sql.*;
 
 public class User {
-    private StringProperty nafn;
+    private StringProperty name;
     private StringProperty email;
     private StringProperty password;
-    private StringProperty kennitala;
+    private StringProperty ssn;
 
 
     /**
      * Smiður fyrir viðskiptavin
-     * @param nafn viðskiptavins
+     * @param name viðskiptavins
      * @param email heimilisfang viðskiptavins
-     * @param kennitala
+     * @param ssn
      */
-    public User(StringProperty nafn, StringProperty email, StringProperty kennitala, StringProperty password) {
-        this.nafn = nafn;
+    public User(StringProperty name, StringProperty email, StringProperty ssn, StringProperty password) {
+        this.name = name;
         this.email = email;
-        this.kennitala = kennitala;
+        this.ssn = ssn;
         this.password = password;
     }
 
@@ -31,8 +30,8 @@ public class User {
         String query = "INSERT INTO user (name, ssn, email, password) VALUES (?, ?, ?, ?)";
         try{
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, nafn.get());
-            pstmt.setString(2, kennitala.get());
+            pstmt.setString(1, name.get());
+            pstmt.setString(2, ssn.get());
             pstmt.setString(3, email.get());
             pstmt.setString(4, password.get());
             pstmt.executeUpdate();
@@ -42,15 +41,15 @@ public class User {
         }
     }
 
-    public String getNafn() {
-        return nafn.get();
+    public String getName() {
+        return name.get();
     }
-    public StringProperty nafnProperty() {
-        return nafn;
+    public StringProperty nameProperty() {
+        return name;
     }
 
-    public void setNafn(String nafn) {
-        this.nafn.set(nafn);
+    public void setName(String name) {
+        this.name.set(name);
     }
 
     public String getEmail() {
@@ -66,16 +65,16 @@ public class User {
 
 
 
-    public String getKennitala() {
-        return kennitala.get();
+    public String getSsn() {
+        return ssn.get();
     }
 
-    public StringProperty kennitalaProperty() {
-        return kennitala;
+    public StringProperty ssnProperty() {
+        return ssn;
     }
 
-    public void setKennitala(int kennitala) {
-        this.kennitala.set(String.valueOf(kennitala));
+    public void setSsn(int ssn) {
+        this.ssn.set(String.valueOf(ssn));
     }
 
     public boolean isNameUnique() {
@@ -84,7 +83,7 @@ public class User {
         String query = "SELECT * FROM user WHERE name=?";
         try{
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, nafn.get());
+            stmt.setString(1, name.get());
             ResultSet rs = stmt.executeQuery();
             return !rs.next();
         } catch (SQLException e) {

@@ -2,6 +2,7 @@ package vidmot;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import vinnsla.Booking;
 import vinnsla.Room;
@@ -26,5 +27,13 @@ public class BookingController {
                 fxRoom.setText(newValue.toString());
             }
         });
+    }
+
+    public void goHome() {
+        ViewSwitcher.switchTo(View.HEIMASIDA);
+    }
+
+    public void goBack() {
+        ViewSwitcher.switchTo(View.HOTEL);
     }
 }

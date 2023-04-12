@@ -3,10 +3,10 @@ public class Room {
 
     private String roomNumber;
     private String type;
-    private double price;
+    private int price;
     private String size;
 
-    public Room(String roomNumber, String type, double price, String size) {
+    public Room(String roomNumber, String type, int price, String size) {
         this.roomNumber = roomNumber;
         this.type = type;
         this.price = price;
@@ -29,11 +29,11 @@ public class Room {
         this.type = type;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

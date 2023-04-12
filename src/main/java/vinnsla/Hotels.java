@@ -68,7 +68,7 @@ public class Hotels {
             while (rs.next()) {
                 String roomNumber = rs.getString("roomnumber");
                 String type = rs.getString("type");
-                double price = rs.getDouble("price");
+                int price = rs.getInt("price");
                 String size = rs.getString("size");
                 Room room = new Room(roomNumber, type, price, size);
                 rooms.add(room);

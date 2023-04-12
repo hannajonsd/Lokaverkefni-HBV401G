@@ -2,6 +2,7 @@ package vidmot;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -12,6 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import vinnsla.Hotel;
 import vinnsla.Review;
 import vinnsla.Room;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class HotelView {
     @FXML
@@ -26,7 +30,7 @@ public class HotelView {
     @FXML
     private TableColumn<Room, String> sizeColumn;
     @FXML
-    private TableColumn<Room, Double> priceColumn;
+    private TableColumn<Room, String> priceColumn;
     @FXML
     private TableColumn<Room, String> typeColumn;
     public Button fxBook;
@@ -54,7 +58,13 @@ public class HotelView {
         });
         roomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceColumn.setCellValueFactory(cellData -> {
+            Integer price = cellData.getValue().getPrice();
+            String priceString;
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+            priceString = numberFormat.format(price) + " kr.";
+            return new ReadOnlyStringWrapper(priceString);
+        });
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
     }
 

@@ -23,43 +23,45 @@ public class LoginDialog extends Dialog<User>{
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private ButtonType cancelbutton;
+
+    private boolean loggedIn = false;
+    private boolean cancel = false;
 
     public LoginDialog() {
         setDialogPane(readUser());
         fxNyskraning.setOnAction(event -> {
-          register();
+            register();
         });
-        setResultConverter(b -> {
-            if(b.getButtonData()==ButtonBar.ButtonData.OK_DONE) {
+        setResultConverter(buttonType -> {
                 String username = usernameField.getText();
                 String password = passwordField.getText();
                 if (!isUsernameInDb(username)) {
                     setHeaderText("Nafn ekki til");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Nafn ekki til");
-                    alert.showAndWait();
-                } else if (doPasswordMatch(username, password)) {
+                } else if (!doPasswordMatch(password, username)) {
                     setHeaderText("Vitlaust lykilorð");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Vitlaust lykilorð");
-                    alert.showAndWait();
-
                 } else {
                     User user = getUserByName(username);
                     System.out.println(user);
-                   return user;
+                    loggedIn = true;
+                    return user;
                 }
-            }
-            return null;
+                return null;
         });
     }
+
     public User getUser(){
-        Optional<User> u = showAndWait();
-        return u.orElse(null);
+        while(!loggedIn && !cancel) {
+
+            Optional<User> u = showAndWait();
+            if(loggedIn){
+
+                return u.orElse(null);
+            }
+            System.out.println(cancel);
+        }
+        return null;
     }
 
     private DialogPane readUser(){

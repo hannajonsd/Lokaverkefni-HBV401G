@@ -31,7 +31,9 @@
             </GridPane>
         </Pane>
     </content>
-    <ButtonType text="Innskrá" buttonData="OK_DONE"/>
-    <ButtonType text="Hætta við" buttonData="CANCEL_CLOSE"/>
+    <buttonTypes>
+    <ButtonType fx:id="login" text="Innskrá" buttonData="OK_DONE"/>
+    <ButtonType fx:id="cancelbutton" text="Hætta við" buttonData="CANCEL_CLOSE"/>
+    </buttonTypes>
 </DialogPane>
 

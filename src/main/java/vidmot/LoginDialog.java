@@ -86,6 +86,12 @@ public class LoginDialog extends Dialog<User>{
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -102,6 +108,12 @@ public class LoginDialog extends Dialog<User>{
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -121,6 +133,12 @@ public class LoginDialog extends Dialog<User>{
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

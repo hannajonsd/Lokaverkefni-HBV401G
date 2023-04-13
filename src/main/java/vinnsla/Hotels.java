@@ -30,6 +30,12 @@ public class Hotels {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -51,6 +57,12 @@ public class Hotels {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return reviews;
     }
@@ -75,6 +87,12 @@ public class Hotels {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return rooms;
     }

@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import vinnsla.Hotel;
 import vinnsla.Review;
 import vinnsla.Room;
+import vinnsla.User;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -25,6 +26,7 @@ public class HotelView {
     public Label addOns;
     @FXML
     public TableView<Room> rooms;
+    public Label fxUser;
     @FXML
     private TableColumn<Room, Integer> roomNumberColumn;
     @FXML
@@ -34,28 +36,19 @@ public class HotelView {
     @FXML
     private TableColumn<Room, String> typeColumn;
     public Button fxBook;
-    private final ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
-    public static ObjectProperty<Room> room= new SimpleObjectProperty<>();
+    private Hotel hotel;
+    private User user;
+
+    SharedModel model = SharedModel.getInstance();
 
 
     public void initialize(){
-        fxBook.disableProperty().bind(Bindings.isEmpty(rooms.getSelectionModel().getSelectedItems()));
-        hotel.bind(HotelController.hotelProperty());
-        if(hotel.get()!= null) {
-            hotelname.setText(hotel.get().getName());
-            fxAbout.setText(hotel.get().getAbout());
-            rooms.setItems(hotel.get().getRooms());
-            setAddOns(hotel.get());
+        user = model.getCurrentUser();
+        if(user!=null) {
+            updateUserName();
         }
-        hotelProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                System.out.print(newValue);
-                hotelname.setText(newValue.getName());
-                fxAbout.setText(newValue.getAbout());
-                rooms.setItems(newValue.getRooms());
-                setAddOns(newValue);
-            }
-        });
+        fxBook.disableProperty().bind(Bindings.isEmpty(rooms.getSelectionModel().getSelectedItems()));
+        setHotel(model.getSelectedHotel());
         roomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
         priceColumn.setCellValueFactory(cellData -> {
@@ -66,6 +59,9 @@ public class HotelView {
             return new ReadOnlyStringWrapper(priceString);
         });
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+    }
+    public void updateUserName() {
+        fxUser.setText(user.getName());
     }
 
     private void setAddOns(Hotel hotel) {
@@ -91,11 +87,17 @@ public class HotelView {
     }
 
     public Hotel getHotel() {
-        return hotel.get();
+        return hotel;
     }
 
     public void setHotel(Hotel hotel) {
-        this.hotel.set(hotel);
+        this.hotel= hotel;
+        if(hotel!= null) {
+            hotelname.setText(hotel.getName());
+            fxAbout.setText(hotel.getAbout());
+            rooms.setItems(hotel.getRooms());
+            setAddOns(hotel);
+        }
     }
 
     public String getHotelname() {
@@ -118,12 +120,9 @@ public class HotelView {
 
         ViewSwitcher.switchTo(View.HEIMASIDA);
     }
-    public ObjectProperty<Hotel> hotelProperty() {
-        return hotel;
-    }
 
     public void getReviews(ActionEvent actionEvent) {
-        ObservableList<Review> reviews = hotel.get().getReviews();
+        ObservableList<Review> reviews = hotel.getReviews();
 
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Umsagnir");
@@ -159,10 +158,6 @@ public class HotelView {
     }
 
     private void setRoom(Room selectedItem) {
-        room.set(selectedItem);
-    }
-
-    public static ObservableValue<Room> roomProperty() {
-        return room;
+        model.setSelectedRoom(selectedItem);
     }
 }

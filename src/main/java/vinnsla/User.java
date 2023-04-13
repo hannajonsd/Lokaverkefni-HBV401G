@@ -38,6 +38,12 @@ public class User {
             System.out.println("user inserted into table");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -89,6 +95,12 @@ public class User {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

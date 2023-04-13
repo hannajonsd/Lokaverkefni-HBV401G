@@ -12,9 +12,6 @@ public class HotelSidaView extends ListView<Hotel> {
      * Hotellistinn búinn til
      */
     public HotelSidaView(){
-        /**
-         * Local hlutur fyrir hotelið
-         */
         Hotels h = new Hotels();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hotelSida-view.fxml"));
         fxmlLoader.setRoot(this);

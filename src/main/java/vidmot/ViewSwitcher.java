@@ -31,9 +31,11 @@ public class ViewSwitcher {
                 loader = new
                         FXMLLoader(ViewSwitcher.class.getResource(view.getFilename()));
                 root = loader.load();
-                cache.put(view, root);
+                if (view == View.HEIMASIDA ) {
+                    cache.put(view, root);
+                    controllers.put(view, loader.getController());
+                }
                 scene.setRoot(root);
-                controllers.put(view, loader.getController());
             }
             scene.setRoot(root);
         } catch (IOException e) {

@@ -18,7 +18,6 @@ public class HotelController {
     private static final ObjectProperty<Hotel> hotel = new SimpleObjectProperty<>();
     @FXML
     public Button fxVelja;
-    public User user;
     @FXML
     public Button fxLogin;
     @FXML
@@ -29,6 +28,10 @@ public class HotelController {
     public TextField searchHotelField;
 
     private FilteredList<Hotel> hotelList;
+
+    private User user;
+
+    SharedModel model = SharedModel.getInstance();
 
 
     public void initialize() {
@@ -66,7 +69,7 @@ public class HotelController {
     }
 
     public void setHotel(Hotel hotel) {
-        HotelController.hotel.set(hotel);
+        model.setSelectedHotel(hotel);
     }
 
     // Define the property getter for the hotel property
@@ -99,8 +102,14 @@ public class HotelController {
         LoginDialog ld = new LoginDialog();
         user = ld.getUser();
         if(user!=null){
-            updateUserName();
+            setUser(user);
         }
+    }
+
+    private void setUser(User user) {
+        model.setCurrentUser(user);
+        this.user= user;
+        updateUserName();
     }
 
     @FXML

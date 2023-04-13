@@ -10,6 +10,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane  prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.HotelView">
    <children>
+      <Label fx:id="fxUser" layoutX="10.0" layoutY="10.0"/>
       <TableView fx:id="rooms" prefWidth="425.0" prefHeight="200.0" layoutX="96.0" layoutY="155.0">
          <columns>
             <TableColumn fx:id="roomNumberColumn" text="Númer" prefWidth="100.0"/>

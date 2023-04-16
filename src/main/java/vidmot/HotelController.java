@@ -82,7 +82,7 @@ public class HotelController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Innskráðu þig");
             alert.setHeaderText(null);
-            alert.setContentText("Þarft að vera innsrkáður til að velja hótel");
+            alert.setContentText("Þarft að vera innskráður til að velja hótel");
             alert.showAndWait();
         }
         else {

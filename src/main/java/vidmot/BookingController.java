@@ -110,7 +110,7 @@ public class BookingController {
         }
         else{
             booking.addBooking();
-            fxBookingMessage.setText("Bókun staðfest");
+            fxBookingMessage.setText("Bókun þín hefur verið staðfest! Hlökkum til að sjá þig");
         }
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.HotelView">
+<AnchorPane prefHeight="650.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.HotelView" style="-fx-background-color: #90EE90;">
    <children>
       <Label fx:id="fxUser" layoutX="10.0" layoutY="10.0" />
       <TableView fx:id="rooms" layoutX="165.0" layoutY="187.0" prefHeight="305.0" prefWidth="537.0">

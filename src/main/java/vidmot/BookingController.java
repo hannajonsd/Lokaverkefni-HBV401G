@@ -62,11 +62,11 @@ public class BookingController {
 
                 // Disable dates within booking start and end dates
                 for (Booking booking : bookings) {
-                    System.out.println(booking.getStart().toString());
-                    System.out.println(booking.getEnd().toString());
-                    if (date.isAfter(booking.getStart()) && date.isBefore(booking.getEnd())) {
+                    if (date.isEqual(booking.getStart()) || date.isEqual(booking.getEnd())
+                            || (date.isAfter(booking.getStart()) && date.isBefore(booking.getEnd()))) {
                         setDisable(true);
                         setStyle("-fx-background-color: #dddddd;"); // Set background color to grey
+                        break;
                     }
                 }
             }

@@ -13,14 +13,12 @@
 <?import javafx.scene.image.ImageView?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650" prefWidth="870" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.HotelController" style="-fx-background-color: #90EE90;" >
    <children>
-      <ImageView fx:id="fxLogo" fitHeight="102.0" fitWidth="89.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true"
-                 preserveRatio="true" style="-fx-border: green;" AnchorPane.bottomAnchor="14.0"
-                 AnchorPane.leftAnchor="14.0">
-         <Image url="@Logo/logo.jpg"/>
+      <ImageView fx:id="fxLogo" fitHeight="119.0" fitWidth="175.0" layoutX="294.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true" style="-fx-border: green;" AnchorPane.bottomAnchor="28.313865661621094" AnchorPane.leftAnchor="294.0">
+         <Image url="@../Logo/logo.jpg" />
       </ImageView>
       <Button fx:id="fxVelja" layoutX="386.5" layoutY="450.0" mnemonicParsing="false" onAction="#onVelja" prefHeight="30.0" prefWidth="97.0" text="Velja" />
       <Button onAction="#searchHotels" layoutX="585.0" layoutY="170.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="Leita" />
-      <Label fx:id="fxUser" layoutX="10.0" layoutY="80.0"/>
+      <Label fx:id="fxUser" layoutX="10.0" layoutY="10.0"/>
       <TextField fx:id="searchHotelField" layoutX="294.5" layoutY="170.0" prefHeight="26.0" prefWidth="281.0" />
       <HotelSidaView fx:id="hotels" layoutX="294.5" layoutY="204.0" prefHeight="193.0" prefWidth="281.0" />
       <ChoiceBox fx:id="filterChoiceBox" onAction="#filterHotels" layoutX="294.5" layoutY="403.0" prefHeight="26.0" prefWidth="281.0">

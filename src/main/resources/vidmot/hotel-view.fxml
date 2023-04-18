@@ -11,11 +11,11 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="870.0" style="-fx-background-color: #90EE90;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.HotelView">
    <children>
-      <ImageView fx:id="fxLogo" fitHeight="119.0" fitWidth="175.0" layoutX="294.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true" style="-fx-border: green;" AnchorPane.bottomAnchor="28.313865661621094" AnchorPane.leftAnchor="294.0">
+      <ImageView fx:id="fxLogo" fitHeight="86.0" fitWidth="131.0" layoutX="700.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" style="-fx-border: green;" AnchorPane.bottomAnchor="511.89781188964844" AnchorPane.leftAnchor="694.0">
          <Image url="@../Logo/logo.jpg" />
       </ImageView>
       <Label fx:id="fxUser" layoutX="10.0" layoutY="10.0" />
-      <TableView fx:id="rooms" layoutX="165.0" layoutY="187.0" prefHeight="305.0" prefWidth="537.0">
+      <TableView fx:id="rooms" layoutX="165.0" layoutY="190.0" prefHeight="305.0" prefWidth="537.0">
          <columns>
             <TableColumn fx:id="roomNumberColumn" prefWidth="100.0" text="Númer" />
             <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Týpa" />
@@ -35,15 +35,15 @@
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Label fx:id="addOns" layoutX="113.0" layoutY="105.0" prefHeight="43.0" prefWidth="537.0" wrapText="true">
+      <Label fx:id="addOns" layoutX="165.0" layoutY="126.0" prefHeight="43.0" prefWidth="537.0" wrapText="true">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Button layoutX="726.0" layoutY="43.0" mnemonicParsing="false" onAction="#getReviews" text="Fá umsagnir">
+      <Button layoutX="602.0" layoutY="507.0" mnemonicParsing="false" onAction="#getReviews" text="Fá umsagnir">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="fxBook" layoutX="650.0" layoutY="508.0" mnemonicParsing="false" onAction="#book" text="Bóka">
+      <Button fx:id="fxBook" layoutX="410.0" layoutY="548.0" mnemonicParsing="false" onAction="#book" text="Bóka">
          <font>
             <Font size="15.0" />
          </font></Button>

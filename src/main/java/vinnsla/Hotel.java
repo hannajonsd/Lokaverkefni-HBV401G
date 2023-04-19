@@ -14,6 +14,8 @@ public class Hotel {
     public boolean wifi;
     public boolean restaurant;
     public ObservableList<Review> reviews;
+    public String webpage;
+    public int distance;
 
     public boolean isSpa() {
         return spa;
@@ -48,7 +50,7 @@ public class Hotel {
     }
 
     public boolean access;
-    public Hotel(String name, String about, ObservableList<Room> rooms, boolean spa, boolean wifi, boolean restaurant, boolean access, ObservableList<Review> reviews) {
+    public Hotel(String name, String about, ObservableList<Room> rooms, boolean spa, boolean wifi, boolean restaurant, boolean access, ObservableList<Review> reviews, String webpage, int distance) {
         this.name = name;
         this.about = about;
         this.rooms = rooms;
@@ -57,7 +59,12 @@ public class Hotel {
         this.restaurant = restaurant;
         this.access = access;
         this.reviews= reviews;
+        this.distance= distance;
+        this.webpage= webpage;
+
     }
+
+
 
     public ObservableList<Room> getRooms() {
         return rooms;
@@ -75,7 +82,21 @@ public class Hotel {
         this.about = about;
     }
 
+    public String getWebpage() {
+        return webpage;
+    }
 
+    public void setWebpage(String webpage) {
+        this.webpage = webpage;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
 
     public Hotel(String name){
         this.name= name;

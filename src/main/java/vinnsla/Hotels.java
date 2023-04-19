@@ -25,7 +25,9 @@ public class Hotels {
                 boolean wifi = rs.getBoolean("wifi");
                 boolean access = rs.getBoolean("access");
                 ObservableList<Review> reviews = getReviewsForHotel(rs.getString("name"));
-                Hotel h = new Hotel(rs.getString("name"), rs.getString("about"), rooms, spa, wifi,  restaurant, access, reviews);
+                int distance = rs.getInt("distance");
+                String webpage = rs.getString("webPage");
+                Hotel h = new Hotel(rs.getString("name"), rs.getString("about"), rooms, spa, wifi,  restaurant, access, reviews, webpage, distance);
                 hotels.add(h);
             }
         } catch (SQLException e) {

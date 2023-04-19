@@ -26,7 +26,12 @@ public class HotelView {
     public Label addOns;
     @FXML
     public TableView<Room> rooms;
+    @FXML
     public Label fxUser;
+    @FXML
+    public Label fxwebpage;
+    @FXML
+    public Label fxDistance;
     @FXML
     private TableColumn<Room, Integer> roomNumberColumn;
     @FXML
@@ -97,6 +102,9 @@ public class HotelView {
             fxAbout.setText(hotel.getAbout());
             rooms.setItems(hotel.getRooms());
             setAddOns(hotel);
+            fxwebpage.setText("Vefslóð: " + hotel.getWebpage());
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+            fxDistance.setText("Vegalengd í miðbæ: "+ numberFormat.format(hotel.getDistance())+ "km");
         }
     }
 

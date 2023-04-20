@@ -76,7 +76,7 @@ public class HotelView {
         else{
         String addOns = "Auka fríðindi: ";
         if(hotel.isResturant()){
-            addOns+= " Það er veitigastaður.";
+            addOns+= " Það er veitingastaður.";
         }
         if(hotel.isWifi()){
             addOns+= " Frítt wifi.";
@@ -85,7 +85,7 @@ public class HotelView {
             addOns+= " Það er spa.";
         }
         if(hotel.isAccess()){
-            addOns+= " Það er aðgegni fyrir hreyfihamlaða.";
+            addOns+= " Það er aðgengi fyrir hreyfihamlaða.";
         }
         this.addOns.setText(addOns);
         }
